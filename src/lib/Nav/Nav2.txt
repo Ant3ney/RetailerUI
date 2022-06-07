@@ -1,0 +1,6 @@
+import React, { useRef } from 'react';
+export default function _() {
+	const ref = useRef(null);
+	console.log('ref', ref);
+	return <div>This is a nav comp</div>;
+}

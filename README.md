@@ -1,3 +1,3 @@
-# Layouter
+# Example a React typescript package that cam be published to npm and used successfully with typescipt.
 
-A npm package designed to save time in creating a site layout / routing system with sanity.io
+An example of this package being used can be found here https://github.com/Ant3ney/learning/tree/ReactTypescriptNPMDeploymentTestExample

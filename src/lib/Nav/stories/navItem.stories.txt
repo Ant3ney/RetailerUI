@@ -1,0 +1,46 @@
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { layouterStorybooksGithubInstall } from 'Config/index';
+import NavItem from './NavItem';
+import Nav from './Nav';
+
+export default {
+	title: 'NavItem',
+	component: NavItem,
+} as ComponentMeta<typeof NavItem>;
+
+const Template: ComponentStory<typeof NavItem> = args => <Nav leftNav={[{ ...args }]} rightNav={[]}></Nav>;
+
+export const ReadMe = Template.bind({});
+ReadMe.parameters = {
+	docs: {
+		description: {
+			story: '#Nav Item\n' + 'The building blocks of the Nav component.\n' + layouterStorybooksGithubInstall,
+		},
+	},
+};
+
+export const CostumesExample = Template.bind({});
+CostumesExample.args = {
+	text: 'Costumes',
+	slug: 'costumes',
+	icon: null,
+	subNavItems: [
+		{
+			text: 'Kids',
+			slug: 'kids',
+			icon: null,
+		},
+		{
+			text: 'Adults',
+			slug: 'adults',
+			icon: null,
+		},
+	],
+};
+
+export const Logo = Template.bind({});
+Logo.args = {
+	slug: 'homepage',
+	icon: 'https://cdn.sanity.io/images/bjwi19ta/development/16c7eebe10abe9e801766511d91eb969477837f0-606x191.png',
+	subNavItems: null,
+};

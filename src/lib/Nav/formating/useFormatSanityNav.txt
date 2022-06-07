@@ -1,0 +1,198 @@
+import { useState, useEffect, useContext } from 'react';
+//@ts-ignore
+import { layouterContext } from 'layouter-tools';
+import './style.scss';
+import { changeURLContext } from 'components/Utilities';
+import navItem from './navItemType';
+import nav from './navType';
+import { stringify } from 'querystring';
+
+type navDoc = {
+	navContent?: any;
+	logo?: any;
+};
+
+export default function useFormatSanityNav() {
+	const [logo, setLogo] = useState<navItem | null>(null);
+	const [gizmo, setGizmo] = useState<navItem | null>(null);
+	const [leftNav, setLeftNav] = useState<navItem[] | null>(null);
+	const [rightNav, setRightNav] = useState<navItem[] | null>(null);
+
+	const { changeURL } = useContext(changeURLContext);
+	const layouterData: any = useContext(layouterContext) || {};
+	const rawNav = layouterData.nav;
+	const client = layouterData.client;
+
+	useEffect(() => {
+		if (logo || !rawNav) return;
+		(async () => {
+			let logo: navItem | null = await createNavItem(rawNav?.home);
+			setLogo(logo);
+			return;
+		})();
+	}, [logo, rawNav]);
+	useEffect(() => {
+		if (gizmo || !rawNav) return;
+		(async () => {
+			const gizmo: navItem | null = await createNavItem(rawNav?.gizmo);
+			setGizmo(gizmo);
+		})();
+	}, [gizmo, rawNav]);
+	useEffect(() => {
+		if (leftNav || !rawNav) return;
+		(async () => {
+			let leftNav: navItem[] | null = await createNavArrayFromRawNav(rawNav, 'leftNavMenu');
+			setLeftNav(leftNav);
+			return;
+		})();
+	}, [leftNav, rawNav]);
+	useEffect(() => {
+		if (rightNav || !rawNav) return;
+		(async () => {
+			let rightNav: navItem[] | null = await createNavArrayFromRawNav(rawNav, 'rightNavMenu');
+			setRightNav(rightNav);
+			return;
+		})();
+	}, [rightNav, rawNav]);
+
+	async function createNavItem(rawNavItem: any): Promise<navItem | null> {
+		if (!rawNavItem) return null;
+		let navItem: navItem = {};
+		let query = null;
+
+		let possibleDoc = null;
+		let icon = null;
+		let onClick = null;
+		let subNavItems = null;
+
+		switch (rawNavItem?._type) {
+			case 'subNavItem':
+				possibleDoc = rawNavItem?.subNavItem;
+
+				try {
+					icon = await client.fetch(query);
+				} catch (err) {
+					console.error(err);
+				}
+
+				navItem.text = rawNavItem?.navContent?.name;
+				navItem.slug = formatSlug(rawNavItem?.navContent?.slug?.current);
+				navItem.icon = icon;
+
+				onClick = createOnClick(navItem);
+				navItem.onClick = onClick;
+				break;
+			case 'navItem':
+				if (rawNavItem?.navContent?._type && rawNavItem.navContent._type === 'reference') {
+					query = `*[_id=="${rawNavItem.navContent._ref}"][0]{..., subNavItems->}`;
+					let navContent = await client.fetch(query);
+					rawNavItem.navContent = navContent;
+				}
+				possibleDoc = rawNavItem;
+
+				try {
+					query = `*[_id=="${possibleDoc?.logo?.asset?._ref}"][0]{...,}.url`;
+					icon = await client.fetch(query);
+					if (possibleDoc?.subNavItems?.length) {
+						subNavItems = [];
+						for (let i = 0; i < possibleDoc?.subNavItems?.length; i++) {
+							let rawSubNavItem = possibleDoc?.subNavItems[i];
+							let subNav = await createNavItem(rawSubNavItem);
+							if (subNav) subNavItems.push(subNav);
+						}
+					}
+				} catch (err) {
+					console.error(err);
+				}
+
+				navItem.text = possibleDoc.name;
+				navItem.slug = getSlugFromNavDoc(possibleDoc);
+				navItem.url = possibleDoc?.url;
+				navItem.icon = icon;
+				navItem.subNavItems = subNavItems;
+
+				onClick = createOnClick(navItem);
+				navItem.onClick = onClick ? onClick : null;
+				break;
+
+			case 'reference':
+				query = `*[_id=="${rawNavItem._ref}"][0]{..., navContent->}`;
+
+				try {
+					possibleDoc = await createDocFromRefrence(rawNavItem._ref);
+					query = `*[_id=="${possibleDoc?.logo?.asset?._ref}"][0]{...,}.url`;
+					icon = await client.fetch(query);
+				} catch (err) {
+					console.error(err);
+				}
+				navItem.icon = icon;
+				navItem.slug = getSlugFromNavDoc(possibleDoc);
+				onClick = createOnClick(navItem);
+				if (onClick) navItem.onClick = onClick;
+
+				break;
+		}
+
+		return navItem;
+	}
+
+	function createOnClick({ subNavItems, slug, url }: navItem): Function | null {
+		//When these propertys are null, the nav component will toggle dropdown
+		if (subNavItems && !slug && !url) return null;
+		else if (!subNavItems && !slug && !url) return null;
+		slug = formatSlug(slug);
+		return () => {
+			const action = slug ? 'changePage' : 'changeURL';
+			changeURL(action, slug, url);
+		};
+	}
+
+	async function createDocFromRefrence(ref: string | null | undefined): Promise<navDoc | null> {
+		if (!ref) return null;
+		let navDoc: navDoc = {};
+		let query = `*[_id=="${ref}"][0]{..., navContent->}`;
+		try {
+			navDoc = await client.fetch(query);
+		} catch (err) {
+			console.error(err);
+		}
+
+		return navDoc;
+	}
+
+	async function createNavArrayFromRawNav(rawNav: any | null, arrayPropName: string | null) {
+		if (!arrayPropName) return null;
+		let rawNavArray = rawNav ? rawNav[arrayPropName]?.navItems : null;
+
+		let navArray: navItem[] | null = null;
+		if (!rawNavArray.length) return null;
+
+		navArray = [];
+		for (let i = 0; i < rawNavArray.length; i++) {
+			const navItem: navItem | null = await createNavItem(rawNav[arrayPropName].navItems[i]);
+			if (navItem) navArray.push(navItem);
+		}
+
+		return navArray;
+	}
+	return {
+		leftNav,
+		rightNav,
+		logo,
+		gizmo,
+	};
+}
+
+function getSlugFromNavDoc(navDoc: navDoc | null): string | null {
+	if (!navDoc) return null;
+	return navDoc?.navContent?.slug?.current;
+}
+
+function formatSlug(slug: string | null | undefined): string | null | undefined {
+	return slug?.replace(/\s+/g, '')?.toLowerCase();
+}
+/* useEffect(() => {
+    if (navIcon || !nav.includeLogo) return;
+    const ref = nav.logo;
+    getURLFromSanityRefrence(ref, client).then(setNavIcon).catch(console.error);
+}, [navIcon]); */

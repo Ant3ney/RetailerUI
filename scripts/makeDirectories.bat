@@ -1,0 +1,9 @@
+cd "../src"
+mkdir jsBuild
+cd jsBuild
+mkdir packageDeps
+cd packageDeps
+mkdir media
+mkdir styles
+cd "../"
+mkdir Nav

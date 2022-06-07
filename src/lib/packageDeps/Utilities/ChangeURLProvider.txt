@@ -1,0 +1,46 @@
+import React, { useEffect, useState, useContext, createContext } from 'react';
+//@ts-ignore
+import { layouterContext } from 'layouter-tools';
+
+export const changeURLContext = createContext<any>({});
+
+export default function ChangeURLProvider({ children }: any) {
+	const { routeStore, client } = useContext(layouterContext) || {};
+	return (
+		<changeURLContext.Provider
+			value={{
+				changeURL,
+				handleActionButton,
+			}}
+		>
+			{children}
+		</changeURLContext.Provider>
+	);
+
+	function handleActionButton(props: any) {
+		if (props.actionButtonAction === 'changeURL') return changeURL(props.actionButtonAction, '', props.url);
+		else if (props.actionButtonAction === 'changePage') {
+			const query = `*[_id=="${props.pageChange._ref}"][0]{"slug": slug.current}`;
+			client
+				.fetch(query)
+				.then((page: any) => {
+					changeURL(props.actionButtonAction, page.slug, '');
+				})
+				.catch(console.error);
+		}
+	}
+	/**
+	 * ChangeURL is a function that takes in a string, a string, and a string, and returns nothing.
+	 * @param {string} action - string - This is the action that you want to perform. Either changePage or updateCurrentLocation
+	 * @param {string} [page] - The page you want to change to.
+	 * @param {string} [url] - The url to change to.
+	 */
+	function changeURL(action: string, page: string = '', url: string = '') {
+		if (action === 'changePage') {
+			routeStore.dispatch({
+				type: 'updateCurrentLocation',
+				currentLocation: page,
+			});
+		} else window.location.href = url;
+	}
+}

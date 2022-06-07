@@ -1,0 +1,84 @@
+import { useContext, useRef, useState, useEffect } from 'react';
+//@ts-ignore
+import { layouterContext } from 'layouter-tools';
+import NavItem from './NavItem';
+import './style.scss';
+import { useMediaQuery } from 'react-responsive';
+import concadinateNavs from './concadinateNavs';
+import { HTML, changeURLContext } from 'components/Utilities';
+import useFormatSanityNav from './useFormatSanityNav';
+
+import navItem from './navItemType';
+import nav from './navType';
+import Nav from './Nav';
+
+export default function NavSanityFormater() {
+	const layouterData: any = useContext(layouterContext) || {};
+	const rawNav = layouterData.nav;
+	const client = layouterData.client;
+	const nav = useFormatSanityNav();
+	const isLoading = !rawNav ? true : false;
+	const { leftNav, rightNav } = nav || {};
+	const { changeURL } = useContext(changeURLContext);
+	const [gizmo, setGizemo] = useState(null);
+
+	useEffect(() => {
+		if (gizmo || !rawNav || !rawNav.gizmo) return;
+		const query = `*[_id=="${rawNav.gizmo._ref}"][0]{..., navContent->}`;
+		client.fetch(query).then(setGizemo).catch(console.error);
+	}, [gizmo, rawNav]);
+
+	/* function formatNav(rawNav: any): nav {
+		const nav: nav = {
+			logo: inProgressNavData?.logo,
+			gizmo: inProgressNavData?.gizmo,
+			leftNav: (() => {
+				return [
+					{
+						text: 'Women',
+						subNavItems: [
+							{
+								text: 'The cool page',
+								slug: 'airplanes',
+							},
+							{
+								text: 'Page 02',
+							},
+						],
+					},
+					{
+						text: 'Men',
+						slug: 'airplanes',
+					},
+				];
+			})(),
+			rightNav: (() => {
+				return [
+					{
+						text: 'Sign Up',
+					},
+					{
+						text: 'Sign In',
+					},
+				];
+			})(),
+		};
+
+		return nav;
+	} */
+
+	function createOnClick({ subNavItems, slug, url }: navItem) {
+		//When these propertys are null, the nav component will toggle dropdown
+		if (subNavItems && !slug && !url) return null;
+		else if (!subNavItems && !slug && !url) return null;
+		return () => {
+			const action = slug ? 'changePage' : 'changeURL';
+			changeURL(action, slug, url);
+		};
+	}
+
+	if (isLoading) return <div>Loading</div>;
+	if (!leftNav || !rightNav) return <div>Nav has not been set up.</div>;
+
+	return <Nav {...nav} />;
+}

@@ -1,0 +1,203 @@
+.retailer-ui-namespace .hide {
+  display: none;
+}
+.retailer-ui-namespace .wide-container {
+  padding: 0rem 2rem;
+  width: 100%;
+  height: auto;
+  display: flex;
+  /* 2xl by default */
+}
+@media (max-width: 640px) {
+  .retailer-ui-namespace .wide-container {
+    /* sm */
+  }
+}
+@media (max-width: 768px) {
+  .retailer-ui-namespace .wide-container {
+    /* md */
+  }
+}
+@media (max-width: 1024px) {
+  .retailer-ui-namespace .wide-container {
+    /* lg */
+  }
+}
+@media (max-width: 1280px) {
+  .retailer-ui-namespace .wide-container {
+    /* xl */
+    padding: 0rem 2rem;
+  }
+}
+@media (max-width: 2080px) {
+  .retailer-ui-namespace .wide-container {
+    /* 2xl */
+  }
+}
+@media (min-width: 2080px) {
+  .retailer-ui-namespace .wide-container {
+    /* 3xl */
+  }
+}
+.retailer-ui-namespace .nav-link,
+.retailer-ui-namespace nav li,
+.retailer-ui-namespace nav li a {
+  font-size: 0.9rem;
+  color: black;
+}
+.retailer-ui-namespace .retailer-ui-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 0rem 10rem;
+}
+.retailer-ui-namespace h1 {
+  font-size: 4rem;
+}
+@media (min-width: 1280px) {
+  .retailer-ui-namespace h1 {
+    /* xl */
+    font-size: 6rem;
+  }
+}
+@media (min-width: 1280px) {
+  .retailer-ui-namespace h1 {
+    /* xl */
+    font-size: 6rem;
+  }
+}
+.retailer-ui-namespace h2 {
+  font-size: 3.5rem;
+}
+.retailer-ui-namespace h3 {
+  font-size: 3rem;
+}
+.retailer-ui-namespace h4 {
+  font-size: 2.5rem;
+}
+.retailer-ui-namespace h5 {
+  font-size: 2rem;
+}
+.retailer-ui-namespace h6 {
+  font-size: 1.5rem;
+}
+.retailer-ui-namespace p,
+.retailer-ui-namespace .text {
+  font-size: 0.875rem;
+  color: #4f4f4f;
+}
+@media (max-width: 640px) {
+  .retailer-ui-namespace {
+    /* sm */
+  }
+  .retailer-ui-namespace .retailer-ui-container {
+    padding: 0rem 1rem;
+  }
+  .retailer-ui-namespace .nav-link,
+.retailer-ui-namespace nav li,
+.retailer-ui-namespace nav li a {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .retailer-ui-namespace {
+    /* md */
+  }
+  .retailer-ui-namespace .retailer-ui-container {
+    padding: 0rem 2rem;
+  }
+}
+@media (max-width: 1024px) {
+  .retailer-ui-namespace {
+    /* lg */
+  }
+}
+@media (max-width: 1280px) {
+  .retailer-ui-namespace {
+    /* xl */
+  }
+}
+@media (max-width: 2080px) {
+  .retailer-ui-namespace {
+    /* 2xl */
+  }
+}
+@media (min-width: 2080px) {
+  .retailer-ui-namespace {
+    /* 3xl */
+  }
+  .retailer-ui-namespace h3 {
+    font-size: 5rem;
+  }
+  .retailer-ui-namespace h6 {
+    font-size: 3.5rem;
+  }
+}
+.retailer-ui-namespace .link-text,
+.retailer-ui-namespace a {
+  color: #da1a35;
+}
+.retailer-ui-namespace .link-text:hover,
+.retailer-ui-namespace a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.retailer-ui-namespace .nav-link:hover,
+.retailer-ui-namespace nav li:hover,
+.retailer-ui-namespace nav li a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+.retailer-ui-namespace button,
+.retailer-ui-namespace .button {
+  color: white;
+  padding: 0.5rem 4rem;
+  background-color: rgb(48, 48, 48);
+  display: flex;
+  width: fit-content;
+  font-size: 1.25rem;
+}
+.retailer-ui-namespace .button-outline {
+  outline: 1px solid rgb(48, 48, 48);
+  background-color: transparent;
+  color: rgb(48, 48, 48);
+  display: flex;
+  width: fit-content;
+  padding: 0.5rem 4rem;
+  font-size: 1.25rem;
+}
+.retailer-ui-namespace .first-comp-margin {
+  margin-top: 12vh;
+}
+.retailer-ui-namespace .flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.retailer-ui-namespace .fit-content {
+  width: fit-content;
+  height: fit-content;
+}
+.retailer-ui-namespace .rigt-third-center-content {
+  margin: auto auto auto 66%;
+}
+.retailer-ui-namespace .center-content {
+  margin: auto;
+}
+.retailer-ui-namespace .bg-red {
+  background-color: red;
+}
+.retailer-ui-namespace .expand-mobile-nav {
+  width: 100vh;
+  z-index: 15;
+  transform: translateX(0rem);
+  opacity: 1;
+}
+.retailer-ui-namespace .h-18vh {
+  height: 18vh;
+}
+.retailer-ui-namespace .storybook-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=app.css.map */

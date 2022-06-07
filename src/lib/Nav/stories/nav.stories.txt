@@ -1,0 +1,77 @@
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import Nav from 'core/Header/Nav/Nav';
+import { layouterStorybooksGithubInstall } from 'Config/index';
+
+export default {
+	title: 'Nav',
+	component: Nav,
+} as ComponentMeta<typeof Nav>;
+
+const Template: ComponentStory<typeof Nav> = args => <Nav {...args} />;
+
+export const ReadMe = Template.bind({});
+ReadMe.parameters = {
+	docs: {
+		description: {
+			story: '#Nav Item\n' + 'The building blocks of the Nav component.\n' + layouterStorybooksGithubInstall,
+		},
+	},
+};
+
+export const MarvalousMarvas = Template.bind({});
+MarvalousMarvas.args = {
+	className: 'h-18vh',
+	leftNav: [
+		{
+			text: 'Women',
+			icon: null,
+			subNavItems: [
+				{
+					text: 'Two Pice',
+					slug: 'twopice',
+					icon: null,
+				},
+				{
+					text: 'One Pice',
+					slug: 'onepice',
+					icon: null,
+				},
+				{
+					text: 'Lingerie',
+					slug: 'lingerie',
+					icon: null,
+				},
+				{
+					text: 'Corsets',
+					slug: 'corsets',
+					icon: null,
+				},
+			],
+			onClick: null,
+		},
+		{
+			text: 'Men',
+			slug: 'airplanes',
+			icon: null,
+			subNavItems: null,
+		},
+	],
+	rightNav: [
+		{
+			text: 'Sign Up',
+			slug: 'airplanes',
+			icon: null,
+			subNavItems: null,
+		},
+	],
+	logo: {
+		slug: 'homepage',
+		icon: 'https://cdn.sanity.io/images/bjwi19ta/development/16c7eebe10abe9e801766511d91eb969477837f0-606x191.png',
+		subNavItems: null,
+	},
+	gizmo: {
+		icon: 'https://cdn.sanity.io/images/bjwi19ta/development/577c645d3f13696afc271fd92e82dd8ebbdbcf1e-48x48.svg',
+		slug: 'airplanes',
+	},
+};
