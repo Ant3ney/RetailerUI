@@ -1,6 +1,6 @@
 {
 	"name": "retailer-ui",
-	"version": "0.2.9",
+	"version": "0.3.1",
 	"description": "A React UI Library for e-commerce retail dropshipping businesses.",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
@@ -8,17 +8,17 @@
 		"react-animate-height": "^2.1.2",
 		"react-responsive": "^9.0.0-beta.8",
 		"react-scripts": "5.0.0",
-		"web-vitals": "^2.1.4",
-		"react": "*",
-		"react-dom": "*"
+		"web-vitals": "^2.1.4"
 	},
 	"peerDependencies": {
-		"react": "*",
-		"react-dom": "*"
+		"react": ">=15.6.2",
+		"react-dom": ">=15.6.2"
 	},
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "node scripts/buildApp.js && set NODE_ENV=production && babel src/jsBuild --out-dir dist --copy-files",
+		"webpack-build": "node scripts/buildApp.js && set NODE_ENV=production && babel src/jsBuild --out-dir bableDist --copy-files && webpack --config webpack.config.js",
+		"webpack-test": "webpack --config webpack.config.js",
 		"build-ts": "cd ./src/jsBuild/Nav && mkdir media && cd ../../../ && Xcopy /E /I \"./src/lib/Nav/media\" \"./src/jsBuild/Nav/media\"",
 		"build-ts-old": "tsc && Copy-Item \"./src/lib/Nav/media\" -Destination \"./src/jsBuild/Nav/media\" -Recurse",
 		"test": "react-scripts test",
@@ -48,6 +48,11 @@
 		"@babel/core": "^7.17.7",
 		"@babel/preset-env": "^7.16.11",
 		"@babel/preset-react": "^7.17.12",
-		"@types/react": "^18.0.9"
+		"@types/react": "^18.0.9",
+		"css-loader": "^6.7.1",
+		"file-loader": "^6.2.0",
+		"svg-inline-loader": "^0.8.2",
+		"webpack": "^5.73.0",
+		"webpack-cli": "^4.10.0"
 	}
 }
