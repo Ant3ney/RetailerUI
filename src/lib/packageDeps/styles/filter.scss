@@ -1,0 +1,98 @@
+.retailer-ui-namespace.filter-container {
+	display: flex;
+	flex-direction: column;
+
+	.inner-filter-container {
+		display: flex;
+		margin: auto;
+		width: 100%;
+		height: 5rem;
+
+		p {
+			margin: auto 0.25rem auto auto;
+		}
+	}
+
+	.extended-filter-container {
+		width: 100%;
+		height: 5rem;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.filter-button {
+		margin: auto;
+		background-color: transparent;
+		padding: 0;
+		display: flex;
+	}
+
+	.filter-category-toggler {
+		margin: auto auto auto 0.25rem;
+		width: 2rem;
+	}
+
+	.input-container {
+		display: flex;
+		flex-direction: column;
+		margin: auto;
+	}
+
+	.input-field[type='checkbox'] {
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-left: 0.5rem;
+	}
+
+	input[type='checkbox'] {
+		min-width: 1rem;
+		min-height: 1rem;
+		width: 1rem;
+		height: 1rem;
+		flex: 0;
+		box-sizing: border-box;
+	}
+	input[type='checkbox']:focus {
+		outline: 1px solid #081c29;
+	}
+
+	.color-label {
+		font-weight: 700;
+	}
+
+	.red {
+		color: red;
+	}
+	.blue {
+		color: blue;
+	}
+	.orange {
+		color: orange;
+	}
+	.green {
+		color: green;
+	}
+	.yellow {
+		color: yellow;
+	}
+}
+
+@media (max-width: 768px) {
+	.retailer-ui-namespace.filter-container {
+		padding: 2rem 0rem;
+		height: auto;
+
+		.inner-filter-container {
+			flex-direction: column;
+			height: auto;
+		}
+		.filter-button {
+			width: 100%;
+		}
+
+		.extended-filter-container {
+			height: auto;
+			padding: 2rem 0rem;
+		}
+	}
+}

@@ -1,2 +1,3 @@
 cd ../
+dir
 tsc

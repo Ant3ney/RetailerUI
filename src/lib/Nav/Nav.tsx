@@ -10,8 +10,7 @@ import closeSVG from '../packageDeps/media/close.svg';
 import hamburgerSvg from '../packageDeps/media/hamburger.svg';
 //@ts-ignore
 import backupBGSrc from '../packageDeps/media/extended-nav-bg-backup.png';
-import '../packageDeps/styles/app.css';
-import '../packageDeps/styles/style.css';
+import '../packageDeps/styles/nav.css';
 
 export default function Nav({ leftNav, rightNav, logo, gizmo, className, bgSrc }: nav) {
 	//Only the left and right nav are required inorder to load the page

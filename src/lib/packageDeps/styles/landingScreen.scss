@@ -1,0 +1,72 @@
+.retailer-ui-namespace.landing-screen-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	height: 100vh;
+
+	.video-BG {
+		height: 100vh;
+		position: absolute;
+		z-index: -10;
+		top: 0;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.landing-screen-content {
+		height: 88vh;
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+		box-sizing: border-box;
+	}
+
+	.landing-content {
+		display: flex;
+		flex-direction: column;
+		height: fit-content;
+		margin: auto 0rem auto auto;
+		width: 25rem;
+	}
+	p {
+		margin-top: 1rem;
+		color: black;
+	}
+	button {
+		margin-top: 1rem;
+	}
+	h3,
+	button,
+	p {
+		text-align: left;
+	}
+
+	@media (max-width: 640px) {
+		/* sm */
+	}
+	@media (max-width: 768px) {
+		/* md */
+		.landing-content {
+			margin: auto;
+			width: auto;
+		}
+	}
+	@media (max-width: 1024px) {
+		/* lg */
+		p,
+		h3,
+		button {
+			margin: auto;
+			text-align: center;
+		}
+		button {
+			margin-top: 1rem;
+		}
+	}
+	@media (max-width: 1280px) {
+		/* xl */
+	}
+	@media (max-width: 1536px) {
+		/* 2xl */
+	}
+}

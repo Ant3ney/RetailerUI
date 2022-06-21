@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-/* import { Landing } from './lib'; */
-import { Nav } from './jsBuild';
+import { Nav, LandingScreen, Filter } from './jsBuild';
 
 function App() {
 	return (
@@ -51,6 +50,15 @@ function App() {
 					},
 				]}
 			/>
+			<LandingScreen
+				title='Would you like to buy our girlscout guns?'
+				subtitle='Or else.'
+				actionText='Buy Our Stuff'
+				onAction={() => {
+					alert('Orloo!');
+				}}
+			/>
+			<Filter showFilterByPrice={true} showFilterByColor={true} showFilterByStyle={true} />
 		</div>
 	);
 }

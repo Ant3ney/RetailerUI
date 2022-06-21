@@ -29,8 +29,7 @@ import closeSVG from '../packageDeps/media/close.svg';
 import hamburgerSvg from '../packageDeps/media/hamburger.svg';
 //@ts-ignore
 import backupBGSrc from '../packageDeps/media/extended-nav-bg-backup.png';
-import '../packageDeps/styles/app.css';
-import '../packageDeps/styles/style.css';
+import '../packageDeps/styles/nav.css';
 export default function Nav(_a) {
     var leftNav = _a.leftNav, rightNav = _a.rightNav, logo = _a.logo, gizmo = _a.gizmo, className = _a.className, bgSrc = _a.bgSrc;
     //Only the left and right nav are required inorder to load the page

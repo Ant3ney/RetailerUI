@@ -17,11 +17,9 @@ var _reactResponsive = require("react-responsive");
 
 var _reactAnimateHeight = _interopRequireDefault(require("react-animate-height"));
 
-require("../packageDeps/styles/app.css");
-
-require("../packageDeps/styles/style.css");
-
 var _dropdown = _interopRequireDefault(require("../packageDeps/media/dropdown.svg"));
+
+require("../packageDeps/styles/nav.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

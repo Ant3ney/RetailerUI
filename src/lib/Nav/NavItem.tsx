@@ -5,10 +5,9 @@ import { useMediaQuery } from 'react-responsive';
 import AnimateHeight from 'react-animate-height';
 //@ts-ignore
 import navItem from './types/navItemType';
-import '../packageDeps/styles/app.css';
-import '../packageDeps/styles/style.css';
 //@ts-ignore
 import dropDownSVG from '../packageDeps/media/dropdown.svg';
+import '../packageDeps/styles/nav.css';
 
 export default function NavItem(navItem: navItem) {
 	const { text, className, icon, subNavItems } = navItem || {};

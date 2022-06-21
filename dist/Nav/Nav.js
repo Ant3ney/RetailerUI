@@ -23,9 +23,7 @@ var _hamburger = _interopRequireDefault(require("../packageDeps/media/hamburger.
 
 var _extendedNavBgBackup = _interopRequireDefault(require("../packageDeps/media/extended-nav-bg-backup.png"));
 
-require("../packageDeps/styles/app.css");
-
-require("../packageDeps/styles/style.css");
+require("../packageDeps/styles/nav.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

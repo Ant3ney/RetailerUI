@@ -14,10 +14,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { HTML } from '../packageDeps/Utilities';
 import { useMediaQuery } from 'react-responsive';
 import AnimateHeight from 'react-animate-height';
-import '../packageDeps/styles/app.css';
-import '../packageDeps/styles/style.css';
 //@ts-ignore
 import dropDownSVG from '../packageDeps/media/dropdown.svg';
+import '../packageDeps/styles/nav.css';
 export default function NavItem(navItem) {
     var _a = navItem || {}, text = _a.text, className = _a.className, icon = _a.icon, subNavItems = _a.subNavItems;
     var uniqueId = "nav-item-".concat(Math.trunc(Math.random() * 100));
